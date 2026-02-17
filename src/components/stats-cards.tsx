@@ -46,6 +46,11 @@ export function StatsCards({ statistics }: StatsCardsProps) {
       color: "text-red-400",
     },
     {
+      label: "Worst Trade",
+      value: formatPercent(statistics.max_trade_drawdown_pct),
+      color: "text-red-400",
+    },
+    {
       label: "Win Rate",
       value: formatPercent(statistics.win_rate_pct),
       color: "text-zinc-50",

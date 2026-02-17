@@ -5,6 +5,8 @@ export interface DashboardData {
   monthly_returns: Record<string, Record<string, number | null>>;
   rolling_sharpe: RollingSharpe;
   statistics: Statistics;
+  per_trade_returns: PerTradeReturn[];
+  current_position: CurrentPosition;
 }
 
 export interface Metadata {
@@ -49,4 +51,23 @@ export interface Statistics {
   starting_capital: number;
   final_capital: number;
   btc_buy_hold_return_pct: number | null;
+  max_trade_drawdown_pct: number | null;
+}
+
+export interface PerTradeReturn {
+  trade_id: number;
+  side: string;
+  status: string;
+  return_pct: number;
+  cv_start: number;
+  cv_exit: number;
+}
+
+export interface CurrentPosition {
+  is_open: boolean;
+  side: string | null;
+  entry_capital: number | null;
+  current_capital: number | null;
+  unrealized_pnl_usdt: number | null;
+  unrealized_pnl_pct: number | null;
 }

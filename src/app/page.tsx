@@ -10,7 +10,24 @@ export default function Page() {
 
   try {
     const raw = fs.readFileSync(filePath, "utf-8");
-    data = JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    // Provide defaults for fields that may not exist in older JSON exports
+    data = {
+      ...parsed,
+      per_trade_returns: parsed.per_trade_returns ?? [],
+      current_position: parsed.current_position ?? {
+        is_open: false,
+        side: null,
+        entry_capital: null,
+        current_capital: null,
+        unrealized_pnl_usdt: null,
+        unrealized_pnl_pct: null,
+      },
+      statistics: {
+        ...parsed.statistics,
+        max_trade_drawdown_pct: parsed.statistics?.max_trade_drawdown_pct ?? null,
+      },
+    };
   } catch {
     // File doesn't exist yet — show placeholder
   }
