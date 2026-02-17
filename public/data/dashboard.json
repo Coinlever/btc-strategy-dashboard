@@ -5,7 +5,7 @@
     "exchange": "Binance",
     "start_date": "2020-01-01",
     "end_date": "2026-02-16",
-    "last_updated": "2026-02-17T18:41:23Z",
+    "last_updated": "2026-02-17T18:49:01Z",
     "starting_capital": 10000.0
   },
   "equity_curve": {
@@ -109803,14 +109803,14 @@
     "starting_capital": 10000.0,
     "final_capital": 141261.32,
     "btc_buy_hold_return_pct": 852.65,
-    "max_trade_drawdown_pct": -2.8
+    "max_trade_drawdown_pct": -2.88
   },
   "per_trade_returns": [
     {
       "trade_id": 0,
       "side": "BUY",
       "status": "BOE",
-      "return_pct": -1.29,
+      "return_pct": -1.3,
       "cv_start": 10000.0,
       "cv_exit": 9871.26
     },
@@ -109826,7 +109826,7 @@
       "trade_id": 2,
       "side": "BUY",
       "status": "TP",
-      "return_pct": -2.59,
+      "return_pct": -2.65,
       "cv_start": 9899.91,
       "cv_exit": 9643.97
     },
@@ -109834,7 +109834,7 @@
       "trade_id": 3,
       "side": "BUY",
       "status": "BOE",
-      "return_pct": -1.41,
+      "return_pct": -1.43,
       "cv_start": 9642.1,
       "cv_exit": 9506.23
     },
@@ -109842,7 +109842,7 @@
       "trade_id": 5,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 215.78,
+      "return_pct": 68.33,
       "cv_start": 9241.21,
       "cv_exit": 29181.71
     },
@@ -109850,7 +109850,7 @@
       "trade_id": 6,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 20.88,
+      "return_pct": 17.27,
       "cv_start": 29167.12,
       "cv_exit": 35256.23
     },
@@ -109858,7 +109858,7 @@
       "trade_id": 7,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 2.71,
+      "return_pct": 2.64,
       "cv_start": 35238.59,
       "cv_exit": 36192.82
     },
@@ -109866,7 +109866,7 @@
       "trade_id": 8,
       "side": "BUY",
       "status": "BOE",
-      "return_pct": -1.13,
+      "return_pct": -1.14,
       "cv_start": 36182.33,
       "cv_exit": 35772.91
     },
@@ -109874,7 +109874,7 @@
       "trade_id": 9,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 1.24,
+      "return_pct": 1.23,
       "cv_start": 35769.49,
       "cv_exit": 36213.83
     },
@@ -109882,7 +109882,7 @@
       "trade_id": 10,
       "side": "BUY",
       "status": "ME",
-      "return_pct": -2.8,
+      "return_pct": -2.88,
       "cv_start": 36201.31,
       "cv_exit": 35187.23
     },
@@ -109890,7 +109890,7 @@
       "trade_id": 11,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 1.9,
+      "return_pct": 1.86,
       "cv_start": 35187.23,
       "cv_exit": 35854.88
     },
@@ -109906,7 +109906,7 @@
       "trade_id": 13,
       "side": "SELL",
       "status": "TP",
-      "return_pct": -1.98,
+      "return_pct": -2.02,
       "cv_start": 35566.8,
       "cv_exit": 34863.0
     },
@@ -109914,7 +109914,7 @@
       "trade_id": 14,
       "side": "SELL",
       "status": "TP",
-      "return_pct": -0.4,
+      "return_pct": -0.41,
       "cv_start": 34855.49,
       "cv_exit": 34714.33
     },
@@ -109922,7 +109922,7 @@
       "trade_id": 15,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 1.84,
+      "return_pct": 1.81,
       "cv_start": 34714.33,
       "cv_exit": 35354.42
     },
@@ -109930,7 +109930,7 @@
       "trade_id": 16,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 16.54,
+      "return_pct": 14.19,
       "cv_start": 35338.46,
       "cv_exit": 41183.45
     },
@@ -109946,7 +109946,7 @@
       "trade_id": 18,
       "side": "BUY",
       "status": "ME",
-      "return_pct": -2.69,
+      "return_pct": -2.76,
       "cv_start": 40826.97,
       "cv_exit": 39730.57
     },
@@ -109954,7 +109954,7 @@
       "trade_id": 19,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 6.35,
+      "return_pct": 5.97,
       "cv_start": 39727.55,
       "cv_exit": 42252.02
     },
@@ -109962,7 +109962,7 @@
       "trade_id": 21,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 38.71,
+      "return_pct": 27.91,
       "cv_start": 41083.33,
       "cv_exit": 56987.25
     },
@@ -109970,7 +109970,7 @@
       "trade_id": 23,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 4.39,
+      "return_pct": 4.2,
       "cv_start": 55406.71,
       "cv_exit": 57838.48
     },
@@ -109978,7 +109978,7 @@
       "trade_id": 24,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 1.64,
+      "return_pct": 1.61,
       "cv_start": 57822.42,
       "cv_exit": 58769.88
     },
@@ -109986,7 +109986,7 @@
       "trade_id": 25,
       "side": "SELL",
       "status": "BOE",
-      "return_pct": -2.13,
+      "return_pct": -2.17,
       "cv_start": 58752.03,
       "cv_exit": 57502.41
     },
@@ -109994,7 +109994,7 @@
       "trade_id": 27,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 1.12,
+      "return_pct": 1.1,
       "cv_start": 52530.41,
       "cv_exit": 53116.21
     },
@@ -110002,7 +110002,7 @@
       "trade_id": 28,
       "side": "BUY",
       "status": "TP",
-      "return_pct": -1.78,
+      "return_pct": -1.81,
       "cv_start": 53099.87,
       "cv_exit": 52154.18
     },
@@ -110010,7 +110010,7 @@
       "trade_id": 29,
       "side": "BUY",
       "status": "TP",
-      "return_pct": -0.76,
+      "return_pct": -0.77,
       "cv_start": 52149.26,
       "cv_exit": 51752.86
     },
@@ -110018,7 +110018,7 @@
       "trade_id": 30,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 47.44,
+      "return_pct": 32.18,
       "cv_start": 51745.19,
       "cv_exit": 76293.05
     },
@@ -110026,7 +110026,7 @@
       "trade_id": 31,
       "side": "BUY",
       "status": "BOE",
-      "return_pct": -0.96,
+      "return_pct": -0.97,
       "cv_start": 76254.91,
       "cv_exit": 75525.11
     },
@@ -110034,7 +110034,7 @@
       "trade_id": 32,
       "side": "BUY",
       "status": "TP",
-      "return_pct": -1.79,
+      "return_pct": -1.83,
       "cv_start": 75517.85,
       "cv_exit": 74163.1
     },
@@ -110042,7 +110042,7 @@
       "trade_id": 33,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 34.58,
+      "return_pct": 25.7,
       "cv_start": 74156.21,
       "cv_exit": 99801.06
     },
@@ -110074,7 +110074,7 @@
       "trade_id": 37,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 2.13,
+      "return_pct": 2.08,
       "cv_start": 99647.44,
       "cv_exit": 101766.19
     },
@@ -110082,7 +110082,7 @@
       "trade_id": 38,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 38.07,
+      "return_pct": 27.57,
       "cv_start": 101732.21,
       "cv_exit": 140458.46
     },
@@ -110098,7 +110098,7 @@
       "trade_id": 40,
       "side": "BUY",
       "status": "BOE",
-      "return_pct": -1.11,
+      "return_pct": -1.12,
       "cv_start": 139461.42,
       "cv_exit": 137911.0
     },
@@ -110106,7 +110106,7 @@
       "trade_id": 41,
       "side": "BUY",
       "status": "TP",
-      "return_pct": 7.59,
+      "return_pct": 7.05,
       "cv_start": 137897.83,
       "cv_exit": 148357.9
     },
@@ -110114,7 +110114,7 @@
       "trade_id": 42,
       "side": "BUY",
       "status": "TP",
-      "return_pct": -1.59,
+      "return_pct": -1.61,
       "cv_start": 148298.74,
       "cv_exit": 145944.13
     },
@@ -110122,7 +110122,7 @@
       "trade_id": 44,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 2.28,
+      "return_pct": 2.23,
       "cv_start": 134315.81,
       "cv_exit": 137376.83
     },
@@ -110130,7 +110130,7 @@
       "trade_id": 45,
       "side": "SELL",
       "status": "TP",
-      "return_pct": 5.6,
+      "return_pct": 5.3,
       "cv_start": 137344.45,
       "cv_exit": 145030.46
     }
