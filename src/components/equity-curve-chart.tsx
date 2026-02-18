@@ -47,7 +47,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
 
   const nameMap: Record<string, string> = {
     strategy: "Strategy (daily)",
-    stepChart: "Strategy (trades only)",
+    stepChart: "Strategy (Realised PnL Only)",
     btc: "BTC Buy & Hold",
   };
 

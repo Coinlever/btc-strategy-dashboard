@@ -45,7 +45,7 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
 
   const nameMap: Record<string, string> = {
     strategy: "Strategy (daily)",
-    tradeOnly: "Strategy (trades only)",
+    tradeOnly: "Strategy (Realised PnL Only)",
     btc: "BTC Buy & Hold",
   };
 
