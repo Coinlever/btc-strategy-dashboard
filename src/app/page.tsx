@@ -12,8 +12,19 @@ export default function Page() {
     const raw = fs.readFileSync(filePath, "utf-8");
     const parsed = JSON.parse(raw);
     // Provide defaults for fields that may not exist in older JSON exports
+    const eq = parsed.equity_curve ?? {};
+    const dd = parsed.drawdown ?? {};
     data = {
       ...parsed,
+      equity_curve: {
+        ...eq,
+        step_chart: eq.step_chart ?? [],
+      },
+      drawdown: {
+        ...dd,
+        trade_only_drawdown_pct: dd.trade_only_drawdown_pct ?? [],
+        btc_drawdown_pct: dd.btc_drawdown_pct ?? [],
+      },
       per_trade_returns: parsed.per_trade_returns ?? [],
       current_position: parsed.current_position ?? {
         is_open: false,
@@ -26,6 +37,7 @@ export default function Page() {
       statistics: {
         ...parsed.statistics,
         max_trade_drawdown_pct: parsed.statistics?.max_trade_drawdown_pct ?? null,
+        strategy_vs_btc_pct: parsed.statistics?.strategy_vs_btc_pct ?? null,
       },
     };
   } catch {

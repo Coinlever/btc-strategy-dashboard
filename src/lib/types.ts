@@ -23,11 +23,14 @@ export interface EquityCurve {
   dates: string[];
   portfolio_value: number[];
   btc_benchmark: (number | null)[];
+  step_chart: (number | null)[];
 }
 
 export interface Drawdown {
   dates: string[];
   drawdown_pct: number[];
+  trade_only_drawdown_pct: number[];
+  btc_drawdown_pct: (number | null)[];
 }
 
 export interface RollingSharpe {
@@ -40,18 +43,14 @@ export interface Statistics {
   sharpe_ratio: number | null;
   sortino_ratio: number | null;
   max_drawdown_pct: number;
-  win_rate_pct: number | null;
-  profit_factor: number | null;
-  num_trades: number;
-  expectancy_usdt: number | null;
+  max_trade_drawdown_pct: number | null;
+  strategy_vs_btc_pct: number | null;
   best_month_pct: number | null;
   worst_month_pct: number | null;
   winning_months: number;
   losing_months: number;
   starting_capital: number;
   final_capital: number;
-  btc_buy_hold_return_pct: number | null;
-  max_trade_drawdown_pct: number | null;
 }
 
 export interface PerTradeReturn {

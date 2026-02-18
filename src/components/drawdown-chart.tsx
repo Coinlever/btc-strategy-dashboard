@@ -3,11 +3,13 @@
 import { useMemo } from "react";
 import {
   ResponsiveContainer,
-  AreaChart,
+  ComposedChart,
   Area,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
   CartesianGrid,
 } from "recharts";
 import type { Drawdown } from "@/lib/types";
@@ -24,24 +26,34 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
     for (let i = 0; i < drawdown.dates.length; i += step) {
       sampled.push({
         date: drawdown.dates[i],
-        drawdown: drawdown.drawdown_pct[i],
+        strategy: drawdown.drawdown_pct[i],
+        tradeOnly: drawdown.trade_only_drawdown_pct?.[i] ?? null,
+        btc: drawdown.btc_drawdown_pct?.[i] ?? null,
       });
     }
     const last = drawdown.dates.length - 1;
     if (sampled[sampled.length - 1]?.date !== drawdown.dates[last]) {
       sampled.push({
         date: drawdown.dates[last],
-        drawdown: drawdown.drawdown_pct[last],
+        strategy: drawdown.drawdown_pct[last],
+        tradeOnly: drawdown.trade_only_drawdown_pct?.[last] ?? null,
+        btc: drawdown.btc_drawdown_pct?.[last] ?? null,
       });
     }
     return sampled;
   }, [drawdown]);
 
+  const nameMap: Record<string, string> = {
+    strategy: "Strategy (daily)",
+    tradeOnly: "Strategy (trades only)",
+    btc: "BTC Buy & Hold",
+  };
+
   return (
     <Card className="mb-8 p-6">
       <h2 className="mb-4 text-lg font-semibold text-zinc-200">Drawdown</h2>
-      <ResponsiveContainer width="100%" height={250}>
-        <AreaChart data={data}>
+      <ResponsiveContainer width="100%" height={300}>
+        <ComposedChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
           <XAxis
             dataKey="date"
@@ -68,9 +80,9 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
               borderRadius: "8px",
             }}
             labelStyle={{ color: "#a1a1aa" }}
-            formatter={(value) => [
+            formatter={(value, name) => [
               typeof value === "number" ? `${value.toFixed(2)}%` : "N/A",
-              "Drawdown",
+              nameMap[String(name)] ?? String(name),
             ]}
             labelFormatter={(label) =>
               new Date(String(label)).toLocaleDateString("en-US", {
@@ -80,15 +92,36 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
               })
             }
           />
+          <Legend
+            wrapperStyle={{ color: "#a1a1aa" }}
+            formatter={(value: string) => nameMap[value] ?? value}
+          />
           <Area
             type="monotone"
-            dataKey="drawdown"
+            dataKey="strategy"
             stroke="#ef4444"
             fill="#ef4444"
-            fillOpacity={0.15}
+            fillOpacity={0.1}
             strokeWidth={1.5}
           />
-        </AreaChart>
+          <Line
+            type="stepAfter"
+            dataKey="tradeOnly"
+            stroke="#818cf8"
+            dot={false}
+            strokeWidth={1.5}
+            strokeDasharray="4 2"
+            connectNulls
+          />
+          <Line
+            type="monotone"
+            dataKey="btc"
+            stroke="#f59e0b"
+            dot={false}
+            strokeWidth={1}
+            strokeDasharray="4 2"
+          />
+        </ComposedChart>
       </ResponsiveContainer>
     </Card>
   );

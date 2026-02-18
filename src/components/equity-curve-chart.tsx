@@ -29,6 +29,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
         date: equityCurve.dates[i],
         strategy: equityCurve.portfolio_value[i],
         btc: equityCurve.btc_benchmark[i],
+        stepChart: equityCurve.step_chart?.[i] ?? null,
       });
     }
     // Always include last point
@@ -38,10 +39,17 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
         date: equityCurve.dates[last],
         strategy: equityCurve.portfolio_value[last],
         btc: equityCurve.btc_benchmark[last],
+        stepChart: equityCurve.step_chart?.[last] ?? null,
       });
     }
     return sampled;
   }, [equityCurve]);
+
+  const nameMap: Record<string, string> = {
+    strategy: "Strategy (daily)",
+    stepChart: "Strategy (trades only)",
+    btc: "BTC Buy & Hold",
+  };
 
   return (
     <Card className="mb-8 p-6">
@@ -77,7 +85,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
             labelStyle={{ color: "#a1a1aa" }}
             formatter={(value, name) => [
               typeof value === "number" ? formatCurrency(value) : "N/A",
-              name === "strategy" ? "Strategy" : "BTC Buy & Hold",
+              nameMap[String(name)] ?? String(name),
             ]}
             labelFormatter={(label) =>
               new Date(String(label)).toLocaleDateString("en-US", {
@@ -89,9 +97,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
           />
           <Legend
             wrapperStyle={{ color: "#a1a1aa" }}
-            formatter={(value: string) =>
-              value === "strategy" ? "Strategy" : "BTC Buy & Hold"
-            }
+            formatter={(value: string) => nameMap[value] ?? value}
           />
           <Line
             type="monotone"
@@ -99,6 +105,15 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
             stroke="#34d399"
             dot={false}
             strokeWidth={2}
+          />
+          <Line
+            type="stepAfter"
+            dataKey="stepChart"
+            stroke="#818cf8"
+            dot={false}
+            strokeWidth={1.5}
+            strokeDasharray="4 2"
+            connectNulls
           />
           <Line
             type="monotone"
