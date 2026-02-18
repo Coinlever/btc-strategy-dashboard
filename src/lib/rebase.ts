@@ -239,9 +239,10 @@ export function rebaseDashboardData(
     btcStart !== null && btcStart !== undefined && btcEnd !== null
       ? (btcEnd / btcStart - 1) * 100
       : null;
+  // Relative outperformance: (1+strat%) / (1+btc%) - 1
   const strategyVsBtc =
-    btcReturnPct !== null
-      ? Math.round((totalReturnPct - btcReturnPct) * 100) / 100
+    btcReturnPct !== null && btcReturnPct !== 0
+      ? Math.round(((1 + totalReturnPct / 100) / (1 + btcReturnPct / 100) - 1) * 100 * 100) / 100
       : null;
 
   // Best/worst trade in period
