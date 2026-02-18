@@ -43,7 +43,10 @@ export interface Statistics {
   sharpe_ratio: number | null;
   sortino_ratio: number | null;
   max_drawdown_pct: number;
+  max_realised_drawdown_pct: number | null;
   max_trade_drawdown_pct: number | null;
+  best_trade_pct: number | null;
+  num_trades: number;
   strategy_vs_btc_pct: number | null;
   best_month_pct: number | null;
   worst_month_pct: number | null;

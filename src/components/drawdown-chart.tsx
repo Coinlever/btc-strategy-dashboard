@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useCallback } from "react";
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -19,7 +19,24 @@ interface DrawdownChartProps {
   drawdown: Drawdown;
 }
 
+type SeriesKey = "strategy" | "tradeOnly" | "btc";
+
 export function DrawdownChart({ drawdown }: DrawdownChartProps) {
+  const [hidden, setHidden] = useState<Set<SeriesKey>>(new Set());
+
+  const toggleSeries = useCallback((dataKey: string) => {
+    setHidden((prev) => {
+      const next = new Set(prev);
+      const key = dataKey as SeriesKey;
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  }, []);
+
   const data = useMemo(() => {
     const step = Math.max(1, Math.floor(drawdown.dates.length / 500));
     const sampled = [];
@@ -44,7 +61,7 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
   }, [drawdown]);
 
   const nameMap: Record<string, string> = {
-    strategy: "Strategy (daily)",
+    strategy: "Strategy (incl. unrealised PnL)",
     tradeOnly: "Strategy (Realised PnL Only)",
     btc: "BTC Buy & Hold",
   };
@@ -93,16 +110,30 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
             }
           />
           <Legend
-            wrapperStyle={{ color: "#a1a1aa" }}
-            formatter={(value: string) => nameMap[value] ?? value}
+            wrapperStyle={{ color: "#a1a1aa", cursor: "pointer" }}
+            formatter={(value: string) => {
+              const label = nameMap[value] ?? value;
+              const isHidden = hidden.has(value as SeriesKey);
+              return (
+                <span style={{ opacity: isHidden ? 0.35 : 1 }}>
+                  {label}
+                </span>
+              );
+            }}
+            onClick={(e) => {
+              if (e && e.dataKey) {
+                toggleSeries(String(e.dataKey));
+              }
+            }}
           />
           <Area
             type="monotone"
             dataKey="strategy"
             stroke="#ef4444"
             fill="#ef4444"
-            fillOpacity={0.1}
+            fillOpacity={hidden.has("strategy") ? 0 : 0.1}
             strokeWidth={1.5}
+            hide={hidden.has("strategy")}
           />
           <Line
             type="stepAfter"
@@ -112,6 +143,7 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
             strokeWidth={1.5}
             strokeDasharray="4 2"
             connectNulls
+            hide={hidden.has("tradeOnly")}
           />
           <Line
             type="monotone"
@@ -120,6 +152,7 @@ export function DrawdownChart({ drawdown }: DrawdownChartProps) {
             dot={false}
             strokeWidth={1}
             strokeDasharray="4 2"
+            hide={hidden.has("btc")}
           />
         </ComposedChart>
       </ResponsiveContainer>

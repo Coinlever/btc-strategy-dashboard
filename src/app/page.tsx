@@ -37,6 +37,9 @@ export default function Page() {
       statistics: {
         ...parsed.statistics,
         max_trade_drawdown_pct: parsed.statistics?.max_trade_drawdown_pct ?? null,
+        max_realised_drawdown_pct: parsed.statistics?.max_realised_drawdown_pct ?? null,
+        best_trade_pct: parsed.statistics?.best_trade_pct ?? null,
+        num_trades: parsed.statistics?.num_trades ?? 0,
         strategy_vs_btc_pct: parsed.statistics?.strategy_vs_btc_pct ?? null,
       },
     };

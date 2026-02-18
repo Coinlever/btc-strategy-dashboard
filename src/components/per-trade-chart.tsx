@@ -17,12 +17,14 @@ import { Card } from "@/components/card";
 
 interface PerTradeChartProps {
   trades: PerTradeReturn[];
-  maxTradeDrawdownPct: number | null;
+  bestTradePct: number | null;
+  worstTradePct: number | null;
 }
 
 export function PerTradeChart({
   trades,
-  maxTradeDrawdownPct,
+  bestTradePct,
+  worstTradePct,
 }: PerTradeChartProps) {
   const data = useMemo(() => {
     return trades.map((t) => ({
@@ -41,14 +43,24 @@ export function PerTradeChart({
         <h2 className="text-lg font-semibold text-zinc-200">
           Per-Trade Returns
         </h2>
-        {maxTradeDrawdownPct !== null && (
-          <span className="text-sm text-zinc-400">
-            Worst trade:{" "}
-            <span className="font-medium text-red-400">
-              {maxTradeDrawdownPct.toFixed(2)}%
+        <div className="flex gap-4 text-sm text-zinc-400">
+          {bestTradePct != null && (
+            <span>
+              Best:{" "}
+              <span className="font-medium text-emerald-400">
+                +{bestTradePct.toFixed(2)}%
+              </span>
             </span>
-          </span>
-        )}
+          )}
+          {worstTradePct != null && (
+            <span>
+              Worst:{" "}
+              <span className="font-medium text-red-400">
+                {worstTradePct.toFixed(2)}%
+              </span>
+            </span>
+          )}
+        </div>
       </div>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>

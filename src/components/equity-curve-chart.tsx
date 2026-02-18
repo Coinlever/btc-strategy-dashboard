@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useCallback } from "react";
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -19,9 +19,25 @@ interface EquityCurveChartProps {
   equityCurve: EquityCurve;
 }
 
+type SeriesKey = "strategy" | "stepChart" | "btc";
+
 export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
+  const [hidden, setHidden] = useState<Set<SeriesKey>>(new Set());
+
+  const toggleSeries = useCallback((dataKey: string) => {
+    setHidden((prev) => {
+      const next = new Set(prev);
+      const key = dataKey as SeriesKey;
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  }, []);
+
   const data = useMemo(() => {
-    // Downsample to ~500 points for performance
     const step = Math.max(1, Math.floor(equityCurve.dates.length / 500));
     const sampled = [];
     for (let i = 0; i < equityCurve.dates.length; i += step) {
@@ -32,7 +48,6 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
         stepChart: equityCurve.step_chart?.[i] ?? null,
       });
     }
-    // Always include last point
     const last = equityCurve.dates.length - 1;
     if (sampled[sampled.length - 1]?.date !== equityCurve.dates[last]) {
       sampled.push({
@@ -46,7 +61,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
   }, [equityCurve]);
 
   const nameMap: Record<string, string> = {
-    strategy: "Strategy (daily)",
+    strategy: "Strategy (incl. unrealised PnL)",
     stepChart: "Strategy (Realised PnL Only)",
     btc: "BTC Buy & Hold",
   };
@@ -96,8 +111,21 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
             }
           />
           <Legend
-            wrapperStyle={{ color: "#a1a1aa" }}
-            formatter={(value: string) => nameMap[value] ?? value}
+            wrapperStyle={{ color: "#a1a1aa", cursor: "pointer" }}
+            formatter={(value: string) => {
+              const label = nameMap[value] ?? value;
+              const isHidden = hidden.has(value as SeriesKey);
+              return (
+                <span style={{ opacity: isHidden ? 0.35 : 1 }}>
+                  {label}
+                </span>
+              );
+            }}
+            onClick={(e) => {
+              if (e && e.dataKey) {
+                toggleSeries(String(e.dataKey));
+              }
+            }}
           />
           <Line
             type="monotone"
@@ -105,6 +133,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
             stroke="#34d399"
             dot={false}
             strokeWidth={2}
+            hide={hidden.has("strategy")}
           />
           <Line
             type="stepAfter"
@@ -114,6 +143,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
             strokeWidth={1.5}
             strokeDasharray="4 2"
             connectNulls
+            hide={hidden.has("stepChart")}
           />
           <Line
             type="monotone"
@@ -122,6 +152,7 @@ export function EquityCurveChart({ equityCurve }: EquityCurveChartProps) {
             dot={false}
             strokeWidth={1.5}
             strokeDasharray="4 2"
+            hide={hidden.has("btc")}
           />
         </ComposedChart>
       </ResponsiveContainer>
